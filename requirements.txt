@@ -1,0 +1,42 @@
+# Core
+numpy
+pandas
+scipy
+statsmodels
+
+# Market Data
+yfinance
+
+# Machine Learning
+scikit-learn
+reservoirpy
+
+# Explainable AI
+shap
+
+# Portfolio Optimization
+cvxpy
+PyPortfolioOpt
+
+# Backtesting
+backtrader
+vectorbt
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Dashboard
+streamlit
+
+# API Backend
+fastapi
+uvicorn
+
+# Utilities
+tqdm
+joblib
+
+# Notebooks
+jupyter
