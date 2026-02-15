@@ -1,42 +1,15 @@
-# Core
-numpy
-pandas
-scipy
-statsmodels
-
-# Market Data
-yfinance
-
-# Machine Learning
-scikit-learn
-reservoirpy
-
-# Explainable AI
-shap
-
-# Portfolio Optimization
-cvxpy
-PyPortfolioOpt
-
-# Backtesting
-backtrader
-vectorbt
-
-# Visualization
-matplotlib
-seaborn
-plotly
-
-# Dashboard
-streamlit
-
-# API Backend
 fastapi
 uvicorn
-
-# Utilities
-tqdm
-joblib
-
-# Notebooks
-jupyter
+streamlit
+pandas
+numpy
+yfinance
+scikit-learn
+plotly
+requests
+# For GenAI placeholder (optional, but good to have)
+openai
+shap
+matplotlib
+groq
+python-dotenv
