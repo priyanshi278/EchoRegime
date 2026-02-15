@@ -1,206 +1,81 @@
-🧠 EchoRegime
-Autonomous Adaptive Portfolio & Risk Management Engine
-📌 Problem Statement
-Build an autonomous system that:
-
-Detects market regimes
-
-Allocates capital dynamically
-
-Manages risk automatically
-
-Protects capital during crashes
-
-Explains every decision
-
-This system is:
-❌ NOT a stock price predictor
-❌ NOT a buy/sell trading bot
-✅ A portfolio decision and risk control engine
-
-🏗 System Architecture
-Market Data → Feature Engineering → Regime Detection (ESN)
-                                   ↓
-                                 SHAP
-                                   ↓
-Allocation Engine → Risk Engine → Backtesting / Stress Testing
-                                   ↓
-                          Explainability & HRP
-                                   ↓
-                      FastAPI API → Streamlit UI
-🧩 Modules Description
-1️⃣ Data Ingestion
-Fetches historical asset prices and computes:
-
-Returns
-
-Volatility
-
-Correlations
-
-Drawdowns
-
-Module:
-core/data_loader.py
-
-2️⃣ Feature Engineering
-Transforms raw data into ML-ready features:
-
-Rolling returns
-
-Rolling volatility
-
-Lagged values
-
-Correlation metrics
-
-Module:
-core/feature_engineering.py
-
-3️⃣ Regime Detection (ML Layer)
-Uses Echo State Network (ESN) to classify:
-
-Bull
-
-Bear
-
-Volatile
-
-Crash
-
-Module:
-core/regime_model.py
-
-4️⃣ Explainable AI (SHAP)
-Explains which features caused a regime decision.
-
-Example:
-
-Volatility: +0.42
-Correlation: +0.31
-
-Module:
-core/shap_explainer.py
-
-5️⃣ Allocation Engine
-Allocates capital using:
-
-Risk parity
-
-Regime-based weighting
-
-Module:
-core/allocation_engine.py
-
-6️⃣ Risk Management Engine
-Controls portfolio risk using:
-
-Volatility targeting
-
-Drawdown protection
-
-Stop-loss rules
-
-Module:
-core/risk_engine.py
-
-7️⃣ Backtesting Engine
-Evaluates strategy using:
-
-Rolling-window backtests
-
-Walk-forward validation
-
-Module:
-core/backtester.py
-
-8️⃣ Stress Testing
-Simulates crisis scenarios:
-
-Volatility spikes
-
-Correlation spikes
-
-Market crashes
-
-Module:
-core/stress_testing.py
-
-9️⃣ Explainability Layer
-Generates human-readable explanations:
-
-"High volatility detected. Reducing equity exposure by 30%."
-
-🔟 API Layer (FastAPI)
-Exposes system via REST endpoints.
-
-Folder:
-
-app/
- ├── main.py
- └── routes/
-🖥 Dashboard (Streamlit)
-Interactive UI for:
-
-Portfolio view
-
-Regime timeline
-
-SHAP plots
-
-Risk hologram
-
-Folder:
-
-dashboard/
-🛠 Tech Stack
-Python
-
-FastAPI
-
-Streamlit
-
-Pandas, NumPy
-
-ReservoirPy (ESN)
-
-scikit-learn
-
-SHAP
-
-CVXPY / PyPortfolioOpt
-
-Plotly
-
-Backtrader
-
-GitHub
-
-📊 Evaluation Metrics
-Sharpe Ratio
-
-Max Drawdown
-
-CAGR
-
-Calmar Ratio
-
-Comparison:
-✔ With risk engine
-✔ Without risk engine
-
-🚀 How to Run
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-streamlit run dashboard/dashboard.py
-🌟 Innovation
-Echo State Networks for regime detection
-
-SHAP-based explainability
-
-Holographic Risk Projection (3D risk visualization)
-
-Fully autonomous portfolio control
-
-🏁 Conclusion
-EchoRegime is an adaptive, explainable, and risk-aware portfolio management engine designed to behave like a robo-advisor combined with a hedge fund risk desk.
+# Autonomous Adaptive Portfolio & Risk Management Engine
+
+## 💡 The Idea
+Traditional portfolio management systems are static and reactive. They often fail to protect capital during rapid market downturns and struggle to explain their decisions to users.
+
+**Our Solution**: An intelligent, autonomous engine that dynamically adjusts asset allocation based on real-time market regime detection. It doesn't just manage risk; it *explains* its decisions using Explainable AI (XAI) and allows users to stress-test the system via an interactive "Crisis Lab".
+
+## 🚀 Key Features
+
+### 1. **Dynamic Regime Detection**
+   - Automatically classifies the market into four regimes: **Bullish, Bearish, High Volatility, Crash**.
+   - Uses a combination of Trend (SMA 200) and Volatility (VIX) indicators.
+
+### 2. **Adaptive Asset Allocation**
+   - **Bullish**: High Equity exposure (Aggressive).
+   - **High Volatility/Bearish**: Shifts to Bonds and Cash (Defensive).
+   - **Crash**: Maximum protection (Cash heavy).
+
+### 3. **Risk Management Engine**
+   - **Volatility Targeting**: Scales position sizes inversely to market volatility.
+   - **Drawdown Control**: Hard stop-loss mechanisms to preserve capital.
+
+### 4. **🧠 Transparent Brain (Explainable AI)**
+   - **Powered by SHAP**: Uses Shapley Additive Explanations to visualize *why* the AI chose a specific regime.
+   - **Generative Explanations**: Integrates with **Groq (Llama-3)** to provide natural language summaries of market conditions.
+
+### 5. **🧪 Crisis Lab (Interactive Stress Testing)**
+   - Allows users to inject hypothetical market shocks (e.g., -10% drop, 2x volatility spike).
+   - Demonstrates in real-time how the engine would rebalance to protect the portfolio.
+
+## 🏗️ Architecture
+
+The project follows a modular microservices-ready architecture:
+
+```
+├── app/
+│   ├── core/               # Core Logic Modules
+│   │   ├── data_loader.py      # Fetches market data (yfinance)
+│   │   ├── regime_detector.py  # Classifies market state
+│   │   ├── allocation_engine.py# Determines weights
+│   │   ├── risk_manager.py     # Applies risk controls
+│   │   ├── backtester.py       # Simulation engine
+│   │   ├── explainer.py        # GenAI (Groq) integration
+│   │   └── xai_engine.py       # SHAP interpretation
+│   ├── api/                # FastAPI Backend
+│   │   └── main.py             # REST Endpoints
+│   └── ui/                 # Streamlit Frontend
+│       └── dashboard.py        # Interactive Dashboard
+├── requirements.txt    # Dependencies
+├── run_app.bat         # One-click launcher
+└── .env                # API Keys
+```
+
+## 🛠️ Tech Stack
+
+-   **Language**: Python 3.9+
+-   **Frontend**: Streamlit (Interactive Dashboard)
+-   **Backend**: FastAPI (Rest API)
+-   **Data Source**: yfinance (Yahoo Finance API)
+-   **Machine Learning / AI**:
+    -   `scikit-learn`: Random Forest (Surrogate Model)
+    -   `shap`: Explainable AI
+    -   `groq`: Generative AI (Llama-3) for Natural Language Explanations
+-   **Data Science**: `pandas`, `numpy`
+-   **Visualization**: `plotly` (Interactive Charts), `matplotlib` (SHAP plots)
+
+## ⚡ How to Run
+
+1.  **Install Dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+2.  **Set API Key**:
+    -   Open `.env` file.
+    -   Add your Groq API Key: `GROQ_API_KEY=your_key_here`
+
+3.  **Launch Dashboard**:
+    ```bash
+    streamlit run app/ui/dashboard.py
+    ```
